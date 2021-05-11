@@ -6,7 +6,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Api( description = "this is person-info")
 @RestController
@@ -30,7 +34,32 @@ PersonRepository personRepository;
     }
     @ApiOperation(value = "save student info")
     @PostMapping
-    public  ResponseEntity savePersonInfo(@RequestBody PersonInfo personInfo){
-        return ResponseEntity.ok(personRepository.save(personInfo));
+
+    public  ResponseEntity savePersonInfo(@Valid @RequestBody PersonInfo personInfo, BindingResult bindingResult){
+        System.out.println(bindingResult.hasErrors()+"error field");
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.ok(bindingResult.getFieldError());
+        }
+        else {
+        //  return ResponseEntity.ok(personRepository.save(personInfo));
+            personRepository.save(personInfo);
+            return ResponseEntity.ok(personRepository.findAll());
+
+        }
+
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity deletePerson(@PathVariable int id){
+        PersonInfo delete=personRepository.findById(id);
+        personRepository.delete(delete);
+        return ResponseEntity.ok(personRepository.findAll());
+    }
+    @PutMapping("/{id}")
+public ResponseEntity edit(@PathVariable int id,@RequestBody PersonInfo personInfo){
+        PersonInfo personInfo1=personRepository.findById(id);
+        personInfo1.setName(personInfo.getName());
+        personRepository.save(personInfo1);
+        return ResponseEntity.ok(personRepository.findAll());
+
+}
 }

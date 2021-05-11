@@ -6,7 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Person implements CommandLineRunner {
+public class Person   implements CommandLineRunner{
     private final PersonRepository personRepository;
 
     public Person(PersonRepository personRepository) {
@@ -22,13 +22,19 @@ loadPerson();
         personone.setId(1);
         personone.setName("pooya");
         personone.setFamilyName("files");
+ 
 personRepository.save(personone);
-        PersonInfo persontwo=new PersonInfo();
+/*        PersonInfo persontwo=new PersonInfo();
         persontwo.setId(2);
         persontwo.setName("jhon");
         persontwo.setFamilyName("spring");
         personRepository.save(persontwo);
-        System.out.println(personRepository.count());
+        PersonInfo personthree=new PersonInfo();
+        personthree.setId(3);
+        personthree.setName("springboot");
+        personthree.setFamilyName("react application");
+        personRepository.save(personthree);
+        System.out.println(personRepository.count());*/
     }
 
 }

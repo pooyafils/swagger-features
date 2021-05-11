@@ -1,19 +1,27 @@
 package com.swagger.learning.example.example_of_swagger_features.model;
 
+import com.sun.istack.NotNull;
+import io.micrometer.core.lang.NonNull;
 import io.swagger.annotations.ApiModelProperty;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Entity
+@Table
 public class PersonInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ApiModelProperty(value = "name of the person",required = true)
+    @Size(min = 5, message = "less that 3")
     private String name;
     @ApiModelProperty(value = "family name of the person",required = true)
+    @NotBlank
+    @NotEmpty
     private String familyName;
     public int getId() {
         return id;
