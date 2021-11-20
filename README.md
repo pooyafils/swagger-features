@@ -1,6 +1,6 @@
-#Swagger 
-usually  we need to provide documentation for the apis that we developed so other developers and client can understand better what each api does.swagger is a good tool to document springboot apis.
-###Steps
+# Swagger 
+usually  we need to provide documentation for the apis that we developed so other developers and client can understand better what each api does. swagger is a good tool to document springboot apis.
+### Steps
 1. maven configuration
 ```
         <dependency>
@@ -49,4 +49,4 @@ public class SwaggerConfig {
 by ``    @ApiOperation(value = "info...")`` we can explain what each api does.
 4. we can also have ``    @ApiModelProperty(value = "info about  attribute",required = true)`` in our model class to explain with more details what each  attribute does or meaning.
 5. last step you need to run the application and enter to ``http://localhost:8081/swagger-ui.html`` to see all the documentation your provide by swagger.
-![Farmers Market Finder Demo](photo/swagger.png)
+![Farmers Market Finder Demo](photo/swagger.PNG)
